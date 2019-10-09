@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.organizer.Helper.Base64Custom;
 import com.example.organizer.R;
 import com.example.organizer.Config.ConfiguracaoFirebase;
 import com.example.organizer.Model.Usuario;
@@ -86,9 +87,12 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if ( task.isSuccessful() ){
-                    Toast.makeText(CadastroActivity.this,
-                            "Sucesso ao cadastrar usuário!",
-                            Toast.LENGTH_SHORT).show();
+
+                    String idUsuario = Base64Custom.codificarBase64( usuario.getEmail());
+                    usuario.setIdUsuario(idUsuario);
+
+                    finish();
+
                 }else {
                     String excecao = "";
                     try {
