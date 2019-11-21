@@ -1,6 +1,7 @@
 package com.example.organizer.Activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,32 +83,34 @@ public class CadastroActivity extends AppCompatActivity {
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
-            usuario.getEmail(), usuario.getSenha()
+                usuario.getEmail(), usuario.getSenha()
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if ( task.isSuccessful() ){
 
-                    String idUsuario = Base64Custom.codificarBase64( usuario.getEmail());
-                    usuario.setIdUsuario(idUsuario);
-
+                    String idUsuario = Base64Custom.codificarBase64( usuario.getEmail() );
+                    usuario.setIdUsuario( idUsuario );
+                    usuario.salvar();
                     finish();
 
                 }else {
+
                     String excecao = "";
                     try {
                         throw task.getException();
-                    } catch (FirebaseAuthWeakPasswordException e) {
-                        excecao = "Digite uma senha melhor!";
-                    } catch (FirebaseAuthInvalidCredentialsException e) {
-                        excecao = "Digite um email válido!";
-                    } catch (FirebaseAuthUserCollisionException e) {
-                        excecao = "Essa conta já foi cadastrada!";
-                    } catch (Exception e) {
-                        excecao = "Erro ao cadastrar usuário: " + e.getMessage();
+                    }catch ( FirebaseAuthWeakPasswordException e){
+                        excecao = "Digite uma senha mais forte!";
+                    }catch ( FirebaseAuthInvalidCredentialsException e){
+                        excecao= "Por favor, digite um e-mail válido";
+                    }catch ( FirebaseAuthUserCollisionException e){
+                        excecao = "Este conta já foi cadastrada";
+                    }catch (Exception e){
+                        excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
                         e.printStackTrace();
-
                     }
+
                     Toast.makeText(CadastroActivity.this,
                             excecao,
                             Toast.LENGTH_SHORT).show();

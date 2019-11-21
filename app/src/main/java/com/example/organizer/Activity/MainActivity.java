@@ -48,8 +48,9 @@ public class MainActivity extends IntroActivity {
         addSlide( new FragmentSlide.Builder()
                 .background(android.R.color.white)
                 .fragment(R.layout.intro_cadastro)
-                .canGoForward(false)
                 .build());
+
+
     }
 
     @Override
@@ -66,18 +67,16 @@ public class MainActivity extends IntroActivity {
         startActivity(new Intent(this, CadastroActivity.class));
     }
 
-    public void verificarUsuarioLogado() {
+    public void verificarUsuarioLogado(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        if ( autenticacao.getCurrentUser() != null ) {
+        //autenticacao.signOut();
+        if( autenticacao.getCurrentUser() != null ){
             abrirTelaPrincipal();
         }
     }
 
-    public void abrirTelaPrincipal() {
+    public void abrirTelaPrincipal(){
         startActivity(new Intent(this, PrincipalActivity.class));
-        Toast.makeText(MainActivity.this,
-                "Sucesso ao fazer Login!",
-                Toast.LENGTH_SHORT).show();
     }
 
 }

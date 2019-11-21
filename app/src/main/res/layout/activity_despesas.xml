@@ -93,5 +93,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDescricao"
         app:maxImageSize="60dp"
-        app:srcCompat="@drawable/ic_check_black_24dp" />
+        app:srcCompat="@drawable/ic_check_black_24dp"
+        android:onClick="salvarDespesa"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

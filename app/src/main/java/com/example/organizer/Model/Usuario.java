@@ -1,5 +1,7 @@
 package com.example.organizer.Model;
 
+import android.util.Log;
+
 import com.example.organizer.Config.ConfiguracaoFirebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
@@ -27,7 +29,7 @@ public class Usuario {
                 .setValue(this);
     }
 
-    @Exclude //notacao pro firebase não salvar esses dados quando for salvar o objeto inteiro
+    //notacao pro firebase não salvar esses dados quando for salvar o objeto inteiro
     public String getIdUsuario() {
         return idUsuario;
     }
@@ -68,7 +70,6 @@ public class Usuario {
         this.email = email;
     }
 
-    @Exclude
     public String getSenha() {
         return senha;
     }
