@@ -2,6 +2,7 @@ package com.example.organizer.Model;
 
 import com.example.organizer.Config.ConfiguracaoFirebase;
 import com.example.organizer.Helper.Base64Custom;
+import com.example.organizer.Helper.DateCustom;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -13,14 +14,15 @@ public class Movimentacao {
     public Movimentacao() {
     }
 
-    public void salvar() {
+    public void salvar(String dataEscolhida) {
         FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         String idUsuario = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
+        String mesAno = DateCustom.mesAnoDataEscolhida(dataEscolhida);
 
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDatabase();
         firebase.child("movimentacao")
                 .child(idUsuario)
-                .child("descubra")
+                .child(mesAno)
                 .push()
                 .setValue(this);
     }
