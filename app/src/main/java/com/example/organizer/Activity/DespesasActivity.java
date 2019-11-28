@@ -47,7 +47,7 @@ public class DespesasActivity extends AppCompatActivity {
             movimentacao = new Movimentacao();
 
             String data = campoData.getText().toString();
-            Double valorRecuperado = (Double.parseDouble(campoValor.getText().toString());
+            Double valorRecuperado = (Double.parseDouble(campoValor.getText().toString()));
 
             movimentacao.setValor(Double.parseDouble(campoValor.getText().toString()));
             movimentacao.setCategoria(campoCategoria.getText().toString());
@@ -59,6 +59,8 @@ public class DespesasActivity extends AppCompatActivity {
             atualizarDespesa(despesaAtualizada);
 
             movimentacao.salvar(data);
+
+            finish();
         }
     }
 
