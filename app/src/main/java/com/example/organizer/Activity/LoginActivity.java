@@ -102,10 +102,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void abrirTelaPrincipal() {
-        startActivity(new Intent(this, PrincipalActivity.class));
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         Toast.makeText(LoginActivity.this,
                 "Sucesso ao fazer Login!",
                 Toast.LENGTH_SHORT).show();
-        finish();
     }
 }

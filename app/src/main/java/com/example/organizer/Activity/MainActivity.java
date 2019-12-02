@@ -3,12 +3,9 @@ package com.example.organizer.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.organizer.Config.ConfiguracaoFirebase;
 import com.example.organizer.R;
-import com.example.organizer.Activity.CadastroActivity;
-import com.example.organizer.Activity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
@@ -48,6 +45,7 @@ public class MainActivity extends IntroActivity {
         addSlide( new FragmentSlide.Builder()
                 .background(android.R.color.white)
                 .fragment(R.layout.intro_cadastro)
+                .canGoForward(false)
                 .build());
 
 
@@ -69,8 +67,8 @@ public class MainActivity extends IntroActivity {
 
     public void verificarUsuarioLogado(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        //autenticacao.signOut();
         if( autenticacao.getCurrentUser() != null ){
+            finish();
             abrirTelaPrincipal();
         }
     }
